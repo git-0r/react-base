@@ -1,22 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
   const plugins = [
     new HtmlWebpackPlugin({ template: './public/index.html' }),
-    new webpack.ProvidePlugin({
-      // Provide the modules that you frequently use
-      React: 'react-jsx-runtime',
-      // Add more modules here as needed
-    }),
     new CompressionPlugin({
       filename: '[path][base].gz',
       algorithm: 'gzip',
@@ -30,10 +23,6 @@ module.exports = (env, argv) => {
     }),
     new CleanWebpackPlugin(),
   ];
-
-  if (!isProduction) {
-    plugins.push(new BundleAnalyzerPlugin());
-  }
 
   return {
     mode: isProduction ? 'production' : 'development',
@@ -76,7 +65,7 @@ module.exports = (env, argv) => {
       rules: [
         {
           test: /\.(js|jsx|ts|tsx)$/,
-          exclude: /(node_modules|bower_components)/,
+          exclude: /(bower_components)/,
           use: {
             loader: 'swc-loader',
             options: {
@@ -109,6 +98,9 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      alias: {
+        react: path.resolve('./node_modules/react'),
+      },
     },
   };
 };
