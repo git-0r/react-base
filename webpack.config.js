@@ -5,6 +5,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const DotenvWebpackPlugin = require('dotenv-webpack');
 
 module.exports = (env, argv) => {
   const isProduction = argv.mode === 'production';
@@ -22,6 +23,9 @@ module.exports = (env, argv) => {
       chunkFilename: '[id].[contenthash].css',
     }),
     new CleanWebpackPlugin(),
+    new DotenvWebpackPlugin({
+      path: path.resolve(__dirname, '.env'),
+    }),
   ];
 
   return {
