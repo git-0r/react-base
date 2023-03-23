@@ -1,6 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from 'react';
 import DrawingBoard from 'drawing-board/src/App';
 import { socket } from './socket';
+import Button from './components/Button';
 // import Timer from './Timer';
 
 type FabricCanvas = fabric.Canvas | null;
@@ -96,7 +97,7 @@ const App = () => {
           placeholder='enter your username'
           onChange={handleChange}
         />
-        <button>Enter</button>
+        <Button />
       </form>
     </div>
   ) : (

@@ -83,6 +83,11 @@ module.exports = (env, argv) => {
                 transform: {
                   react: {
                     runtime: 'automatic',
+                    pragma: 'React.createElement',
+                    pragmaFrag: 'React.Fragment',
+                    throwIfNamespace: true,
+                    development: false,
+                    useBuiltins: false,
                   },
                 },
               },

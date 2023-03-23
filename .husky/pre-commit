@@ -33,6 +33,13 @@ echo 'Code looks good to me.'
 echo '🏗️👷 Adding any changes in files to git'
 git add -A .
 
+echo '🏗️👷 Running tests'
+npm run test ||
+(
+    echo 'test failed.'
+    false;
+)
+
 # If everything passes... Now we can commit
 echo 'Code looks good to me... Trying to build now.'
 
