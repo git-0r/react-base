@@ -11,7 +11,8 @@
     "pf": "prettier --loglevel warn --write \"src/**/*.{ts,tsx}\"",
     "pc": "prettier --check \"src/**/*.{ts,tsx}\"",
     "tc": "tsc --pretty --noEmit",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postinstall": "cd ./node_modules/drawing-board && npm i"
   },
   "keywords": [],
   "author": "",
