@@ -2,6 +2,7 @@ import { SyntheticEvent, useEffect, useState } from 'react';
 import DrawingBoard from 'drawing-board/src/App';
 import { socket } from './socket';
 import Button from './components/Button';
+import runOneSignal from './oneSignal';
 // import Timer from './Timer';
 
 type FabricCanvas = fabric.Canvas | null;
@@ -79,6 +80,10 @@ const App = () => {
     const target = event.target as HTMLInputElement;
     setUsername(target.value);
   };
+
+  useEffect(() => {
+    runOneSignal();
+  }, []);
 
   if (!form && playerCount < 2) {
     return <p>waiting for more people to join.</p>;
